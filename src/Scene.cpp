@@ -4,7 +4,8 @@ struct Scene
 {
     int objectNum;
     Camera camera;
-    std::vector<Object> objects;
+    std::vector<Surface *> surfaces;
+    std::vector<Light *> lights;
     
     int width;
     int height;

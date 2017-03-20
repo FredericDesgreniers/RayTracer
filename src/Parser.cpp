@@ -36,9 +36,9 @@ void ReadSceneFile(std::string fileName, Scene &scene)
     int objectNum;
     file >> objectNum;
     
-    scene.objectNum = objectNum;
+    scene.objectNum = objectNum + 1;
     
-    for(int i=0; i < objectNum; i++)
+    for(int i=0; i < objectNum + 1; i++)
     {
         std::string line;
         file >> line;
@@ -59,6 +59,7 @@ void ReadSceneFile(std::string fileName, Scene &scene)
             file >> line  >> camera->a;
             
             std::cout << *camera << std::endl;
+            
         }
         else if(line == "light")
         {
@@ -68,23 +69,32 @@ void ReadSceneFile(std::string fileName, Scene &scene)
             file >> line;
             light->col = ReadVec3(file);
             
+            scene.lights.push_back(light);
+            
             std::cout << *light << std::endl;
         }
         else if(line == "plane")
         {
             std::cout << "Plane object" << std::endl;
             Plane *plane = new Plane();
+            
+            plane->type = PLANE;
+            
             file >> line;
             plane->nor = ReadVec3(file);
             file >> line;
             plane->pos = ReadVec3(file);
             
             ReadSurface(plane, file);
+            
+            scene.surfaces.push_back(plane);
         }
         else if(line == "triangle")
         {
             std::cout << "Triangle object" << std::endl;
             Triangle *triangle = new Triangle();
+            
+            triangle->type = TRIANGLE;
             
             file >> line;
             triangle->v1 = ReadVec3(file);
@@ -97,6 +107,8 @@ void ReadSceneFile(std::string fileName, Scene &scene)
             
             ReadSurface(triangle, file);
             
+            scene.surfaces.push_back(triangle);
+            
         }
         else if(line == "sphere")
         {
@@ -104,12 +116,16 @@ void ReadSceneFile(std::string fileName, Scene &scene)
             
             Sphere *sphere = new Sphere();
             
+            sphere->type = SPHERE;
+            
             file >> line;
             sphere->pos = ReadVec3(file);
             
             file >> line >> sphere->rad;
             
             ReadSurface(sphere, file);
+            
+            scene.surfaces.push_back(sphere);
             
         }
         

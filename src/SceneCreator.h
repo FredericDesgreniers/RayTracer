@@ -6,6 +6,7 @@
 #include <iterator>
 #include <sstream>
 
+#include "Cimg.h"
 
 //math./geo stuff
 #include "MyMath.h"
