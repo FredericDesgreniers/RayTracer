@@ -252,3 +252,33 @@ Intersection IntersectsSurface(Ray &ray, Surface &surface)
     inter.valid = false;
     return inter;
 }
+
+vec3 GetNormal(Surface* surface, Ray &ray)
+{
+    vec3 normal;
+    switch(surface->type)
+    {
+        case PLANE:
+        {
+            normal = (static_cast<Plane *>(surface))->nor;
+            break;
+        }
+        case TRIANGLE:
+        {
+            Triangle *triangle = (static_cast<Triangle *>(surface));
+            normal = ((triangle->v3)-triangle->v1) ^ (triangle->v2-triangle->v1);
+            break;
+        }
+        case SPHERE:
+        {
+            Sphere *sphere= (static_cast<Sphere *>(surface));
+            
+            normal = ray.pos-sphere->pos;
+            
+            
+            break;
+        }
+    }
+    return normal;
+    
+}

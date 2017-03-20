@@ -14,10 +14,25 @@ float Max(float a, float b)
     return (a > b)?a:b;
 }
 
+float Min(float a, float b)
+{
+    return (a < b)?a:b;
+}
+
+
+
+
 struct vec3
 {
     float x,y,z;
 };
+
+vec3 Mult(vec3 &left, vec3 &right)
+{
+    return {
+        left.x*right.x, left.y*right.y, left.z*right.z
+    };
+}
 
 vec3 operator+(vec3 &left, vec3 &right)
 {
