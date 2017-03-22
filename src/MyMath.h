@@ -24,7 +24,14 @@ float Min(float a, float b)
 
 struct vec3
 {
-    float x,y,z;
+    union {
+        struct{
+            float x,y,z;
+        };
+        struct{
+            float r,g,b;
+        };
+    };
 };
 
 vec3 Mult(vec3 &left, vec3 &right)
@@ -52,6 +59,12 @@ vec3 operator*(float d, vec3 &vec)
 vec3 operator*(vec3 &vec,float d)
 {
     return {d*vec.x, d*vec.y, d*vec.z};
+}
+
+
+vec3 operator/(vec3 &vec,float d)
+{
+    return {vec.x/d, vec.y/d, vec.z/d};
 }
 
 

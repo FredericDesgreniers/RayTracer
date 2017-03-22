@@ -1,4 +1,7 @@
 #pragma once
+
+//#define RR
+
 #include <iostream>
 #include <fstream>
 #include <string>
