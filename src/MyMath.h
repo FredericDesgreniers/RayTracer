@@ -61,6 +61,16 @@ vec3 operator*(vec3 &vec,float d)
     return {d*vec.x, d*vec.y, d*vec.z};
 }
 
+vec3 Div(vec3 &top, vec3 &bottom)
+{
+    return {top.x/bottom.x, top.y/bottom.y, top.z/bottom.z};
+    
+}
+
+vec3 operator/(vec3 &top, vec3 &bottom)
+{
+    return Div(top, bottom);
+}
 
 vec3 operator/(vec3 &vec,float d)
 {

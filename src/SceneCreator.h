@@ -8,8 +8,9 @@
 #include <vector>
 #include <iterator>
 #include <sstream>
-
+#include <thread>
 #include "Cimg.h"
+#include <chrono>
 
 //math./geo stuff
 #include "MyMath.h"

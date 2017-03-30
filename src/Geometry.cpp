@@ -185,7 +185,7 @@ Intersection Intersects(Ray &ray, Triangle &triangle)
     e1 = triangle.v2 - triangle.v1;
     e2 = triangle.v3 - triangle.v1;
     
-    P = ray.dir ^ e2;
+    P = Norm(ray.dir) ^ e2;
     
     det = e1 * P;
     
@@ -201,7 +201,7 @@ Intersection Intersects(Ray &ray, Triangle &triangle)
     
     T = ray.pos - triangle.v1;
     
-    u = (T*P) * inv_det;
+    u = (T*P)* inv_det;
     
     if(u < 0.0f || u > 1.0f)
     {
@@ -219,7 +219,7 @@ Intersection Intersects(Ray &ray, Triangle &triangle)
         return inter;
     }
     
-    t = (e2 * Q);
+    t = (e2 * Q) * inv_det;
     if(t > EPSILON)
     {
         inter.valid = true;
@@ -260,20 +260,20 @@ vec3 GetNormal(Surface* surface, Ray &ray)
     {
         case PLANE:
         {
-            normal = (static_cast<Plane *>(surface))->nor;
+            normal = Norm((static_cast<Plane *>(surface))->nor);
             break;
         }
         case TRIANGLE:
         {
             Triangle *triangle = (static_cast<Triangle *>(surface));
-            normal = ((triangle->v3)-triangle->v1) ^ (triangle->v2-triangle->v1);
+            normal = Norm(((triangle->v2)-triangle->v1) ^ (triangle->v3-triangle->v1));
             break;
         }
         case SPHERE:
         {
             Sphere *sphere= (static_cast<Sphere *>(surface));
             
-            normal = ray.pos-sphere->pos;
+            normal = Norm(ray.pos-sphere->pos);
             
             
             break;
